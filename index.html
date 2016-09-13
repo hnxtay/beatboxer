@@ -82,6 +82,26 @@ Inspired by https://www.youtube.com/watch?v=6O_92BTrUcA
         // 'sounds/maracas.wav',
       ];
 
+      function prefetchResource(url) {
+        let res = document.createElement('link');
+        res.rel = 'prefetch';
+        res.href = url;
+        document.head.appendChild(res);
+      }
+
+      function preloadAudio(url) {
+        let audio = new Audio();
+        audio.preload = 'auto';
+        audio.src = url;
+      }
+
+      // Start preloading all the audio files
+      for (let i in sounds) {
+        let url = sounds[i];
+        prefetchResource(url)
+        preloadAudio(url);
+      }
+
       const grid = document.getElementById('grid');
       sounds.forEach(function () {
         const fragment = document.createDocumentFragment();
